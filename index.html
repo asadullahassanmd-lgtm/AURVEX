@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURVEX USD</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#090909;color:#fff;font-family:Arial,sans-serif;padding:20px 16px 90px}
+header{display:flex;justify-content:space-between;align-items:center}
+.logo{color:#e5bd62;font-size:27px;font-weight:900;letter-spacing:3px}
+small{color:#aaa}.card{background:linear-gradient(135deg,#242016,#111);border:1px solid #715b2b;border-radius:18px;padding:20px;margin:20px 0}
+.balance{font-size:36px;color:#edc66b;font-weight:bold;margin:12px 0}
+h2{font-size:19px}button{background:#d9b45e;color:#111;border:0;padding:12px 16px;border-radius:12px;font-weight:bold}
+.actions{display:flex;gap:10px}.actions button{flex:1}
+nav{position:fixed;bottom:0;left:0;right:0;background:#171717;border-top:1px solid #66522c;display:flex;justify-content:space-around;padding:12px 3px}
+nav button{background:none;color:#ddd;padding:8px 4px;font-size:11px}
+nav button.active{color:#edc66b}
+.page{display:none}.page.active{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.game{background:#1b1b1b;border:1px solid #514326;padding:16px 10px;border-radius:15px;text-align:center}
+.emoji{font-size:30px}.game p{margin:8px 0}
+.item{background:#1b1b1b;padding:15px;border-radius:12px;margin:10px 0}
+.gold{color:#e5bd62}
+</style>
+</head>
+<body>
+<header><div><div class="logo">AURVEX</div><small>PREMIUM USD PLATFORM</small></div><div class="gold">✦ VIP</div></header>
+<section id="home" class="page active">
+<div class="card"><small>YOUR DEMO USD BALANCE</small><div class="balance">$0.00</div><small>Demo wallet · No real money</small><div class="actions" style="margin-top:18px"><button onclick="show('history')">History</button><button onclick="show('profile')">Profile</button></div></div>
+<h2>Welcome to AURVEX</h2><p class="gold">Play • Learn • Earn</p><div class="item">🎮 Explore 10 free games</div><div class="item">💵 Discover earning projects</div>
+</section>
+<section id="games" class="page"><h2>🎮 Game Zone</h2><div class="grid" id="gamegrid"></div></section>
+<section id="earn" class="page"><h2>💰 Earn Projects</h2><p>Approved advertising opportunities only.</p><div id="earnlist"></div></section>
+<section id="history" class="page"><h2>📜 Transaction History</h2><div class="item">No transactions yet.</div></section>
+<section id="profile" class="page"><h2>👤 Profile</h2><div class="item">Telegram account: <span id="tgname">Guest demo</span></div><div class="item">Wallet currency: USD</div><div class="item">Account status: Demo</div></section>
+<section id="admin" class="page"><h2>🔐 Admin Preview</h2><div class="item">Admin dashboard preview only. Secure server authentication is required before real administration.</div><div class="item">Users · Payment requests · Audit logs</div></section>
+<nav>
+<button class="active" onclick="show('home',this)">⌂<br>Home</button>
+<button onclick="show('games',this)">🎮<br>Games</button>
+<button onclick="show('earn',this)">💵<br>Earn</button>
+<button onclick="show('history',this)">◷<br>History</button>
+<button onclick="show('profile',this)">♙<br>Profile</button>
+</nav>
+<script>
+const tg=window.Telegram?.WebApp;
+if(tg){tg.ready();tg.expand();if(tg.initDataUnsafe?.user)document.getElementById('tgname').textContent=tg.initDataUnsafe.user.first_name||'Telegram user'}
+function show(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')}
+const games=[['🎡','Lucky Spin'],['🕵️','Thief & Police'],['🃏','Card Challenge'],['💎','Treasure Hunt'],['🌧️','Coin Rain'],['🔢','Number Battle'],['🚀','Rocket Run'],['🎲','Dice Challenge'],['🫧','Bubble Pop'],['🧩','Lucky Puzzle']];
+document.getElementById('gamegrid').innerHTML=games.map(g=>'<div class="game"><div class="emoji">'+g[0]+'</div><p>'+g[1]+'</p><small>Free game</small></div>').join('');
+document.getElementById('earnlist').innerHTML=Array.from({length:20},(_,i)=>'<div class="item">📺 Project '+String(i+1).padStart(2,'0')+'<br><small>Advertising provider integration required</small></div>').join('');
+</script>
+</body>
+</html>
