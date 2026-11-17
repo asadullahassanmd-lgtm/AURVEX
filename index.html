@@ -173,6 +173,35 @@ function bubble(){result("🫧 Pop! You burst "+(Math.floor(Math.random()*15)+1)
 function puzzle(){result("🧩 Puzzle challenge: What comes next? 2, 4, 6, ?");let b=document.createElement("button");b.textContent="8";b.onclick=()=>result("🎉 Correct! Well done!");document.getElementById("gamearea").appendChild(b);}
 function challenge(){document.getElementById("challengeinfo").textContent="Demo challenge completed! No cash reward is issued.";}
 function showHistory(){document.getElementById("historylist").textContent=history.length?history.join(" | "):"No activity yet.";}
+</script><script>
+const TELEGRAM_VERIFY_URL = "https://bejeflsdlryrxmovphwn.supabase.co/functions/v1/telegram-verify";
+</script><script>
+(async function () {
+  if (!window.Telegram || !window.Telegram.WebApp) return;
+
+  const tg = window.Telegram.WebApp;
+  tg.ready();
+  tg.expand();
+
+  try {
+    const response = await fetch(TELEGRAM_VERIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: tg.initData })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.verified) {
+      console.error("Telegram verification failed:", result.error);
+      return;
+    }
+
+    console.log("Telegram verified:", result.telegram_id);
+  } catch (error) {
+    console.error("Verification error:", error);
+  }
+})();
 </script>
 </body>
-</html>
+</html><script src="https://telegram.org/js/telegram-web-app.js"></script>
