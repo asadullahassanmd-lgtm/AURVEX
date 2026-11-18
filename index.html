@@ -1,208 +1,127 @@
 <!DOCTYPE html>
-<html lang="en"><script src="https://telegram.org/js/telegram-web-app.js"></script>
-<head><script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AURVEX VIP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080a10">
+<title>AURVEX — Play & Earn</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#070d1c;color:#fff;font-family:Arial,sans-serif}
-header{padding:22px 18px;background:#101a30;border-bottom:1px solid #b99a48;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:27px;font-weight:900;color:#f8d77a;letter-spacing:2px}
-.vip{color:#f8d77a}
-main{padding:18px;padding-bottom:95px}
-.card{background:linear-gradient(145deg,#142746,#101729);border:1px solid #42516c;border-radius:20px;padding:20px;margin-bottom:17px}
-.balance{font-size:38px;color:#f8d77a;font-weight:bold;margin:12px 0}
-button{border:0;border-radius:13px;padding:14px;background:#e9c76c;color:#172039;font-weight:bold;font-size:15px;cursor:pointer}
-button:active{transform:scale(.97)}
-.blue{background:#123d78;color:white;width:100%;margin:8px 0}
-.small{font-size:13px;color:#9eacc5}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.game{background:#14233d;border:1px solid #455775;border-radius:18px;padding:19px 8px;text-align:center;cursor:pointer}
-.game .emoji{font-size:34px}
-.game strong{display:block;margin:10px 0}
-.game small{color:#b6c5dc}
-nav{position:fixed;bottom:0;left:0;right:0;background:#101a30;border-top:1px solid #45516b;display:flex;justify-content:space-around;padding:12px 2px}
-nav button{background:transparent;color:#dce5f5;padding:7px 3px;font-size:12px}
-nav button.active{color:#f8d77a}
-.hidden{display:none}
-.gamebox{text-align:center;padding:25px 10px}
-.big{font-size:65px;margin:22px}
-.gold{color:#f8d77a}
-input{width:100%;padding:13px;border-radius:10px;border:1px solid #53627b;background:#0a1426;color:white;margin:8px 0}
+:root{--bg:#080a10;--panel:#111622;--panel2:#171e2d;--gold:#e9bd58;--gold2:#ffdf8a;--muted:#9ba6b8;--line:#293246;--green:#42d69a;--red:#ff7272}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#182033 0,#080a10 48%);color:#f5f6fa;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:86px}
+header{padding:20px 16px 12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#090c13ed;backdrop-filter:blur(12px);z-index:5;border-bottom:1px solid #20283a}
+.brand{font-weight:900;letter-spacing:3px;color:var(--gold);font-size:22px}.sub{font-size:11px;color:var(--muted);letter-spacing:1.5px}.pill{border:1px solid #6f5727;color:var(--gold2);border-radius:20px;padding:7px 10px;font-size:11px}
+main{max-width:760px;margin:auto;padding:16px}.screen{display:none}.screen.active{display:block}
+h1{font-size:25px;margin:8px 0 4px}h2{font-size:18px;margin:0 0 12px}p{color:var(--muted);line-height:1.5}
+.hero{background:linear-gradient(135deg,#29213a,#121a29 60%,#332817);border:1px solid #70582d;border-radius:22px;padding:20px;margin:8px 0 18px;box-shadow:0 12px 35px #0006}
+.label{font-size:12px;color:var(--muted)}.balance{font-size:36px;font-weight:850;color:var(--gold2);margin:5px 0}.small{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.tile,.card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:14px}
+.tile{min-height:104px;cursor:pointer}.tile:active,button:active{transform:scale(.98)}.emoji{font-size:25px}.tile b{display:block;margin:6px 0 2px}.tile span{font-size:12px;color:var(--muted)}
+.actions{display:flex;gap:9px;margin-top:15px}.btn{border:0;border-radius:12px;padding:12px 14px;font-weight:750;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#201707;cursor:pointer}.btn.secondary{background:#202a3c;color:#f3f5fa;border:1px solid #36435a}.btn.danger{background:#46252a;color:#ffd7d7;border:1px solid #77434a}.btn:disabled{opacity:.45;cursor:not-allowed}
+.actions .btn{flex:1}.section{margin:20px 0}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.muted{color:var(--muted)}.gold{color:var(--gold2)}
+input,select{width:100%;padding:13px;border-radius:11px;border:1px solid #344057;background:#0b101a;color:white;margin:6px 0 12px;font:inherit}label{font-size:12px;color:var(--muted)}.notice{background:#302817;border:1px solid #70582d;color:#f5d998;border-radius:12px;padding:12px;font-size:12px;line-height:1.5;margin:12px 0}
+.list{display:grid;gap:9px}.item{background:#111724;border:1px solid #293246;border-radius:12px;padding:12px}.item small{color:var(--muted)}.status{font-size:11px;color:var(--gold2)}
+.gamebox{text-align:center;padding:24px 14px}.gamebig{font-size:58px;margin:16px}.game-result{font-size:20px;color:var(--gold2);min-height:32px;margin:14px}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:10;display:grid;grid-template-columns:repeat(5,1fr);background:#0c111bed;border-top:1px solid #2a3447;padding:8px 5px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(14px)}
+nav button{background:none;border:0;color:#aab4c5;font-size:10px;padding:5px 0;cursor:pointer}nav button strong{display:block;font-size:20px;margin-bottom:2px}nav button.active{color:var(--gold2)}
+.hidden{display:none!important}.tag{font-size:10px;border:1px solid #65522d;border-radius:20px;padding:3px 7px;color:var(--gold2)}
+footer{text-align:center;color:#667187;font-size:10px;padding:24px 10px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:26px}}
 </style>
 </head>
 <body>
-<header>
-<div><div class="logo">AURVEX</div><div class="small">PREMIUM USD PLATFORM</div></div>
-<div class="vip">✦ VIP</div>
-</header>
+<header><div><div class="brand">AURVEX</div><div class="sub">PLAY • LEARN • EARN</div></div><div class="pill">DEMO VERSION</div></header>
 <main>
-<section id="home">
-<div class="card">
-<div class="small">YOUR DEMO USD BALANCE</div>
-<div class="balance" id="balance">$0.00</div>
-<div class="small">Demo wallet · No real money</div>
-<p><button onclick="page('history')">History</button> <button onclick="page('profile')">Profile</button></p>
-</div>
-<h2>Welcome to AURVEX</h2>
-<p class="gold">Play · Learn · Earn</p>
-<button class="blue" onclick="page('games')">🎮 Explore 10 free games</button>
-<button class="blue" onclick="page('earn')">💵 Discover earning projects</button>
+<section id="home" class="screen active">
+ <div class="hero"><div class="row"><span class="label">YOUR DEMO WALLET</span><span class="tag">USD</span></div><div class="balance" id="homeBalance">$0.00</div><div class="small">Demo points only · not withdrawable cash</div><div class="actions"><button class="btn" onclick="show('wallet')">Wallet</button><button class="btn secondary" onclick="show('earn')">Earn now</button></div></div>
+ <div class="section"><div class="row"><h2>Quick access</h2><span class="small">AURVEX</span></div><div class="grid">
+  <div class="tile" onclick="show('wallet')"><div class="emoji">💳</div><b>Deposit</b><span>Demo request</span></div>
+  <div class="tile" onclick="show('wallet')"><div class="emoji">🏧</div><b>Withdraw</b><span>Demo request</span></div>
+  <div class="tile" onclick="show('games')"><div class="emoji">🎮</div><b>Games</b><span>10 mini games</span></div>
+  <div class="tile" onclick="show('earn')"><div class="emoji">🎁</div><b>Earn</b><span>Daily activities</span></div>
+  <div class="tile" onclick="show('history')"><div class="emoji">📜</div><b>History</b><span>Activity records</span></div>
+  <div class="tile" onclick="show('profile')"><div class="emoji">👤</div><b>Profile</b><span>Account & ranking</span></div>
+ </div></div>
+ <div class="notice">This is a working front-end demo. Deposits, withdrawals, ad rewards and balances are not connected to real money or a payment provider.</div>
 </section>
 
-<section id="games" class="hidden">
-<h2>🎮 Game Arena</h2>
-<p class="small">10 free demo games · No betting</p>
-<div class="grid" id="gamegrid"></div>
+<section id="games" class="screen">
+ <h1>Games</h1><p>Play with demo points. No real-money betting.</p>
+ <div class="grid" id="gameGrid"></div>
+ <div id="gamePanel" class="card gamebox hidden"><div class="row"><h2 id="gameTitle">Game</h2><button class="btn secondary" onclick="closeGame()">Close</button></div><div class="gamebig" id="gameEmoji">🎮</div><div id="gameDesc" class="small">Play a round</div><div class="game-result" id="gameResult"></div><button class="btn" id="playGameBtn" onclick="playGame()">Play round</button></div>
 </section>
 
-<section id="play" class="hidden">
-<button onclick="page('games')">← Back to Games</button>
-<div class="card gamebox">
-<h2 id="gametitle" class="gold"></h2>
-<div class="big" id="gameemoji">🎮</div>
-<p id="gameinfo">Play for fun!</p>
-<div id="gamearea"></div>
-</div>
+<section id="earn" class="screen">
+ <h1>Earn</h1><p>Demo activities to test the app flow.</p>
+ <div class="card"><div class="row"><div><b>Daily check-in</b><div class="small">Once per day · demo points</div></div><span class="gold">+$0.10</span></div><div class="actions"><button class="btn" onclick="claimDaily()">Claim demo reward</button></div></div>
+ <div class="card section"><div class="row"><div><b>Rewarded ad slot</b><div class="small">Ad network not connected</div></div><span class="tag">Coming soon</span></div><p>When an approved ad provider is connected, eligible completed views can be recorded here. No fake views or guaranteed earnings.</p><button class="btn secondary" disabled>Watch ad — unavailable</button></div>
+ <div class="card"><b>Referral program</b><p>Referral tracking will activate after Telegram account authentication is connected.</p><button class="btn secondary" onclick="show('profile')">View profile</button></div>
 </section>
 
-<section id="earn" class="hidden">
-<h2>💵 Earn Center</h2>
-<div class="card">
-<h3>Demo Reward Projects</h3>
-<p>Explore learning and daily challenges.</p>
-<button class="blue" onclick="challenge()">Complete Demo Challenge</button>
-<p id="challengeinfo" class="small"></p>
-</div>
-<div class="card">
-<h3>Reward Information</h3>
-<p class="small">No real ad revenue or cash rewards are connected in this demo.</p>
-</div>
+<section id="wallet" class="screen">
+ <h1>Wallet</h1><div class="hero"><div class="label">DEMO BALANCE</div><div class="balance" id="walletBalance">$0.00</div><div class="small">USD display · simulated balance only</div></div>
+ <div class="notice">Do not send money to any address from this demo. Real deposits and payouts require verified payment-provider integration and admin controls.</div>
+ <div class="grid">
+  <div class="card"><h2>Deposit request</h2><label>Amount (demo USD)</label><input id="depositAmount" type="number" min="1" max="1000" placeholder="e.g. 10"><label>Payment method</label><select id="depositMethod"><option>Choose method</option><option>Manual review (demo)</option></select><button class="btn" onclick="requestDeposit()">Submit demo request</button></div>
+  <div class="card"><h2>Withdraw request</h2><label>Amount (demo USD)</label><input id="withdrawAmount" type="number" min="1" max="1000" placeholder="e.g. 5"><label>Destination (test only)</label><input id="withdrawDestination" placeholder="Test reference only"><button class="btn" onclick="requestWithdraw()">Submit demo request</button></div>
+ </div>
+ <div class="section"><h2>Recent wallet requests</h2><div id="walletRequests" class="list"></div></div>
 </section>
 
-<section id="history" class="hidden">
-<h2>📜 Activity History</h2>
-<div class="card" id="historylist">No activity yet.</div>
-</section>
+<section id="history" class="screen"><h1>History</h1><p>Your activity on this device.</p><div id="historyList" class="list"></div></section>
 
-<section id="profile" class="hidden">
-<h2>👤 My Profile</h2>
-<div class="card">
-<p>Account: Demo User</p>
-<p>Wallet: USD Demo</p>
-<p id="profilebalance">Balance: $0.00</p>
-<p class="small">Telegram login and secure accounts will be connected in a later step.</p>
-</div>
+<section id="profile" class="screen">
+ <h1>Profile</h1><div class="card"><div class="row"><div><div class="small">PLAYER</div><b id="playerName">AURVEX Guest</b></div><div class="emoji">👑</div></div><p class="small">Telegram secure login will be connected in the backend stage.</p></div>
+ <div class="section grid">
+  <div class="card"><div class="small">DEMO BALANCE</div><h2 id="profileBalance" class="gold">$0.00</h2></div>
+  <div class="card"><div class="small">RANK</div><h2>New Player</h2></div>
+ </div>
+ <div class="card"><h2>Top 50 leaderboard</h2><p>Leaderboard will show verified users after the backend is connected.</p><div id="leaderboard"></div></div>
+ <div class="card section"><h2>Admin panel</h2><p>Private admin access is not enabled in this front-end demo. It must be protected by server-side roles before use.</p><span class="tag">Backend setup required</span></div>
+ <div class="actions"><button class="btn secondary" onclick="resetDemo()">Reset demo data</button></div>
 </section>
+<footer>AURVEX © 2026 · Demo only</footer>
 </main>
-
 <nav>
-<button class="active" onclick="page('home',this)">🏠<br>Home</button>
-<button onclick="page('games',this)">🎮<br>Games</button>
-<button onclick="page('earn',this)">💵<br>Earn</button>
-<button onclick="page('history',this)">📜<br>History</button>
-<button onclick="page('profile',this)">👤<br>Profile</button>
+ <button class="active" data-screen="home" onclick="show('home')"><strong>⌂</strong>Home</button>
+ <button data-screen="games" onclick="show('games')"><strong>🎮</strong>Games</button>
+ <button data-screen="earn" onclick="show('earn')"><strong>🎁</strong>Earn</button>
+ <button data-screen="history" onclick="show('history')"><strong>📜</strong>History</button>
+ <button data-screen="profile" onclick="show('profile')"><strong>👤</strong>Profile</button>
 </nav>
-
 <script>
-const games=[
-["Lucky Spin","🎡"],["Thief & Police","👮"],["Card Challenge","🃏"],
-["Treasure Hunt","💎"],["Coin Rain","🌧️"],["Number Battle","🔢"],
-["Rocket Run","🚀"],["Dice Challenge","🎲"],["Bubble Pop","🫧"],
-["Lucky Puzzle","🧩"]
+const gameData=[
+ ['Lucky Spin','🎡','Spin and reveal a random demo result.'],
+ ['Thief & Police','🚓','Choose whether to catch the thief.'],
+ ['Card Challenge','🃏','Reveal one mystery card.'],
+ ['Treasure Hunt','🗺️','Find the hidden treasure.'],
+ ['Coin Rain','🪙','Catch a falling coin.'],
+ ['Number Battle','🔢','Compare your number with the system.'],
+ ['Rocket Run','🚀','Launch a rocket for a random score.'],
+ ['Dice Challenge','🎲','Roll a virtual die.'],
+ ['Bubble Pop','🫧','Pop a bubble for a demo score.'],
+ ['Lucky Puzzle','🧩','Solve a quick number puzzle.']
 ];
-let balance=0, history=[];
-function page(id,btn){
-document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
-document.getElementById(id).classList.remove("hidden");
-document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-if(btn)btn.classList.add("active");
-if(id==="history")showHistory();
-if(id==="profile")document.getElementById("profilebalance").textContent="Balance: $"+balance.toFixed(2);
+let state={balance:0,history:[],requests:[],dailyClaimed:false};
+try{const saved=JSON.parse(localStorage.getItem('aurvex_demo')||'null');if(saved)state={...state,...saved}}catch(e){}
+function money(n){return '$'+Number(n).toFixed(2)}
+function save(){localStorage.setItem('aurvex_demo',JSON.stringify(state));render()}
+function addHistory(type,amount,note){state.history.unshift({type,amount,note,time:new Date().toLocaleString()});}
+function render(){
+ ['homeBalance','walletBalance','profileBalance'].forEach(id=>document.getElementById(id).textContent=money(state.balance));
+ document.getElementById('historyList').innerHTML=state.history.length?state.history.map(x=>`<div class="item"><div class="row"><b>${esc(x.type)}</b><span class="gold">${x.amount?money(x.amount):''}</span></div><small>${esc(x.note)} · ${esc(x.time)}</small></div>`).join(''):'<div class="item muted">No activity yet.</div>';
+ document.getElementById('walletRequests').innerHTML=state.requests.length?state.requests.map(x=>`<div class="item"><div class="row"><b>${esc(x.type)} · ${money(x.amount)}</b><span class="status">Pending demo</span></div><small>${esc(x.detail)} · ${esc(x.time)}</small></div>`).join(''):'<div class="item muted">No requests yet.</div>';
 }
-const grid=document.getElementById("gamegrid");
-games.forEach((g,i)=>{
-let d=document.createElement("div");
-d.className="game";
-d.innerHTML='<div class="emoji">'+g[1]+'</div><strong>'+g[0]+'</strong><small>Free game</small>';
-d.onclick=()=>openGame(i);
-grid.appendChild(d);
-});
-function openGame(i){
-page("play");
-document.getElementById("gametitle").textContent=games[i][0];
-document.getElementById("gameemoji").textContent=games[i][1];
-document.getElementById("gameinfo").textContent="Play this free demo game. No money or betting required.";
-let area=document.getElementById("gamearea");
-area.innerHTML="";
-if(i===0){
-area.innerHTML='<button onclick="spin()">SPIN THE WHEEL</button>';
-}else if(i===1){
-area.innerHTML='<button onclick="thief()">Find the Thief</button>';
-}else if(i===2){
-area.innerHTML='<button onclick="card()">Pick a Card</button>';
-}else if(i===3){
-area.innerHTML='<button onclick="treasure()">Find Treasure</button>';
-}else if(i===4){
-area.innerHTML='<button onclick="rain()">Catch Coins</button>';
-}else if(i===5){
-area.innerHTML='<input id="guess" type="number" placeholder="Enter a number from 1 to 10"><button onclick="numberGame()">Battle</button>';
-}else if(i===6){
-area.innerHTML='<button onclick="rocket()">Launch Rocket</button>';
-}else if(i===7){
-area.innerHTML='<button onclick="dice()">Roll Dice</button>';
-}else if(i===8){
-area.innerHTML='<button onclick="bubble()">Pop Bubbles</button>';
-}else{
-area.innerHTML='<button onclick="puzzle()">Solve Puzzle</button>';
-}
-}
-function result(msg){
-document.getElementById("gameinfo").textContent=msg;
-}
-function spin(){result("🎡 The wheel landed on "+(Math.floor(Math.random()*10)+1)+"! Great play!");}
-function thief(){result(["🚓 You found the thief!","🕵️ Try again!","👮 The police caught the thief!"][Math.floor(Math.random()*3)]);}
-function card(){result("🃏 Your card is "+["A","K","Q","J","10"][Math.floor(Math.random()*5)]);}
-function treasure(){result(["💎 Treasure found!","🗺️ Keep searching!","⭐ You discovered a golden star!"][Math.floor(Math.random()*3)]);}
-function rain(){result("🌧️ You caught "+(Math.floor(Math.random()*20)+1)+" demo coins!");}
-function numberGame(){let n=Number(document.getElementById("guess").value);if(n<1||n>10||!n){result("Enter a number from 1 to 10.");return;}let x=Math.floor(Math.random()*10)+1;result(n===x?"🎉 Correct number!":"The number was "+x+". Try again!");}
-function rocket(){result("🚀 Rocket launched! Distance: "+(Math.floor(Math.random()*1000)+100)+" meters!");}
-function dice(){result("🎲 You rolled: "+(Math.floor(Math.random()*6)+1));}
-function bubble(){result("🫧 Pop! You burst "+(Math.floor(Math.random()*15)+1)+" bubbles!");}
-function puzzle(){result("🧩 Puzzle challenge: What comes next? 2, 4, 6, ?");let b=document.createElement("button");b.textContent="8";b.onclick=()=>result("🎉 Correct! Well done!");document.getElementById("gamearea").appendChild(b);}
-function challenge(){document.getElementById("challengeinfo").textContent="Demo challenge completed! No cash reward is issued.";}
-function showHistory(){document.getElementById("historylist").textContent=history.length?history.join(" | "):"No activity yet.";}
-</script><script>
-const TELEGRAM_VERIFY_URL = "https://bejeflsdlryrxmovphwn.supabase.co/functions/v1/telegram-verify";
-</script><script>
-(async function () {
-  if (!window.Telegram || !window.Telegram.WebApp) return;
-
-  const tg = window.Telegram.WebApp;
-  tg.ready();
-  tg.expand();
-
-  try {
-    const response = await fetch(TELEGRAM_VERIFY_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ initData: tg.initData })
-    });
-
-    const result = await response.json();
-
-    if (!response.ok || !result.verified) {
-      console.error("Telegram verification failed:", result.error);
-      return;
-    }
-
-    console.log("Telegram verified:", result.telegram_id);
-  } catch (error) {
-    console.error("Verification error:", error);
-  }
-})();
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.screen===id));window.scrollTo(0,0);render()}
+function requestDeposit(){let a=Number(document.getElementById('depositAmount').value);if(!Number.isFinite(a)||a<1||a>1000)return alert('Enter an amount from 1 to 1000.');let m=document.getElementById('depositMethod').value;if(m==='Choose method')return alert('Choose a payment method.');state.requests.unshift({type:'Deposit',amount:a,detail:m,time:new Date().toLocaleString()});addHistory('Deposit request',a,'Demo request submitted');save();alert('Demo deposit request saved. No money was transferred.')}
+function requestWithdraw(){let a=Number(document.getElementById('withdrawAmount').value),d=document.getElementById('withdrawDestination').value.trim();if(!Number.isFinite(a)||a<1||a>1000)return alert('Enter an amount from 1 to 1000.');if(a>state.balance)return alert('Demo balance is not enough.');if(!d)return alert('Enter a test reference.');state.requests.unshift({type:'Withdrawal',amount:a,detail:d,time:new Date().toLocaleString()});addHistory('Withdrawal request',a,'Demo request submitted');save();alert('Demo withdrawal request saved. No payout was made.')}
+function claimDaily(){if(state.dailyClaimed)return alert('Daily demo reward already claimed.');state.dailyClaimed=true;state.balance+=.10;addHistory('Daily demo reward',.10,'Test reward only');save();alert('Demo reward added: $0.10')}
+function resetDemo(){if(confirm('Reset all demo data on this device?')){state={balance:0,history:[],requests:[],dailyClaimed:false};save()}}
+let currentGame=-1;
+document.getElementById('gameGrid').innerHTML=gameData.map((g,i)=>`<div class="tile" onclick="openGame(${i})"><div class="emoji">${g[1]}</div><b>${g[0]}</b><span>Play demo</span></div>`).join('');
+function openGame(i){currentGame=i;document.getElementById('gamePanel').classList.remove('hidden');document.getElementById('gameTitle').textContent=gameData[i][0];document.getElementById('gameEmoji').textContent=gameData[i][1];document.getElementById('gameDesc').textContent=gameData[i][2];document.getElementById('gameResult').textContent='';document.getElementById('gamePanel').scrollIntoView({behavior:'smooth',block:'center'})}
+function closeGame(){document.getElementById('gamePanel').classList.add('hidden');currentGame=-1}
+function playGame(){if(currentGame<0)return;let i=currentGame,results=['You found a bonus!','Nice try! Play again.','A surprise result appeared!','Great round!'];let n=Math.floor(Math.random()*4);document.getElementById('gameResult').textContent=results[n];addHistory(gameData[i][0],0,'Free demo game round');save()}
+render();
 </script>
-</body>
-</html><script src="https://telegram.org/js/telegram-web-app.js"></script>
+</body></html>
